@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head lang="en">
+    <link rel="stylesheet" type="text/css" href="../static/css/main.css" />
+</head>
+<body>
+
+<div class="container">
+    <div th:fragment="header">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#" th:href="@{/}">Home</a>
+                    <ul class="nav navbar-nav">
+                        <li><a href="#" th:href="@{/products}">Products</a></li>
+                        <li><a href="#" th:href="@{/product/new}" sec:authorize="hasAuthority('ADMIN')">Create Product</a></li>
+                        <li><a href="#" th:href="@{/login}">Sign In</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="bar">
+            <form th:action="@{/logout}" method="post">
+                <div class="col-sm-10"><span sec:authorize="isAuthenticated()">Welcome <span sec:authentication="name"></span></span></div>
+                <div class="col-sm-2" style="padding-top: 30px;">
+                   <span sec:authorize="isAuthenticated()">
+                        <input type="submit" value="Sign Out"/>
+                   </span>
+                </div>
+            </form>
+        </div>
+
+        <div class="jumbotron">
+            <div class="row text-center">
+                <div class="">
+                    <h2>Securing A Web Application</h2>
+
+                    <h3>Spring Boot Security Web App</h3>
+                </div>
+            </div>
+            <!--<div class="row text-center">
+                <img src="../../static/images/security.jpg" width="400" th:src="@{/images/security.jpg}"/>
+            </div>-->
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
